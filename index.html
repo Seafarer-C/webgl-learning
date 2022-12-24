@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      .view {
+        width: 100vh;
+        height: 100vh;
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+      }
+      #menu {
+        margin: 0;
+        width: 250px;
+        height: 100%;
+        background-color: #dbdbdb;
+        flex: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="view">
+      <menu id="menu"> </menu>
+      <canvas id="canvas" width="600" height="800"></canvas>
+    </div>
+    <script type="module">
+      const pathname = window.location?.pathname;
+      if (pathname === "/") {
+        window.location.pathname = "/lesson1";
+        pathname = "/lesson1";
+      }
+      import(`.${pathname}/index.ts`);
+      const lessons = ["绘制点", "绘制矩形", "绘制立方体"];
+      const menu = document.getElementById("menu");
+
+      menu.innerHTML = lessons
+        .map((lesson, i) => `<li><a href="/lesson${i + 1}">${lesson}</a></li>`)
+        .join("");
+    </script>
+  </body>
+</html>

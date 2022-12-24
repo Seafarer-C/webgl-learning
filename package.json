@@ -1,0 +1,22 @@
+{
+  "name": "webgl-learning",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Seafarer-C/webgl-learning.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Seafarer-C/webgl-learning/issues"
+  },
+  "homepage": "https://github.com/Seafarer-C/webgl-learning#readme",
+  "devDependencies": {
+    "vite": "^4.0.3"
+  }
+}
