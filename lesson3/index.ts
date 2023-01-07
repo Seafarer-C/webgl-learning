@@ -1,41 +1,62 @@
-import { getGL, initShader } from "../shared/index";
+import {
+  getGL,
+  initShader,
+} from '../shared/index';
 
 const gl = getGL();
-
-/**
- *  gl_PointSize	点渲染模式，方形点区域渲染像素大小  float
-    gl_Position	    顶点位置坐标	                vec4
-    gl_FragColor	片元颜色值	                    vec4
-    gl_FragCoord	片元坐标，单位像素	             vec2
-    gl_PointCoord	点渲染模式对应点像素坐标	      vec2
- */
 //顶点着色器源码
 const vertexShaderSource =
+  //attribute声明vec4类型变量apos
   "attribute vec4 apos;" +
-  "void main() {" +
-  //给内置变量gl_PointSize赋值像素大小
-  "   gl_PointSize=30.0;" +
-  //顶点位置，位于坐标原点
-  "   gl_Position = apos;" +
+  "void main(){" +
+  //设置几何体轴旋转角度为30度，并把角度值转化为浮点值
+  "float radian = radians(30.0);" +
+  //求解旋转角度余弦值
+  "float cos = cos(radian);" +
+  //求解旋转角度正弦值
+  "float sin = sin(radian);" +
+  //引用上面的计算数据，创建绕x轴旋转矩阵
+  // 1      0      0    0
+  // 0   cosα   sinα    0
+  // 0  -sinα   cosα    0
+  // 0      0      0    1
+  "mat4 mx = mat4(1,0,0,0,  0,cos,-sin,0,  0,sin,cos,0,  0,0,0,1);" +
+  //引用上面的计算数据，创建绕y轴旋转矩阵
+  // cosβ   0   sinβ    0
+  //    0   1      0    0
+  //-sinβ   0   cosβ    0
+  //    0   0      0    1
+  "mat4 my = mat4(cos,0,-sin,0,  0,1,0,0,  sin,0,cos,0,  0,0,0,1);" +
+  //两个旋转矩阵、顶点齐次坐标连乘
+  "   gl_Position = mx*my*apos;" +
   "}";
-
 //片元着色器源码
 const fragShaderSource =
-  "void main(){" +
-  //定义片元颜色
-  "   gl_FragColor = vec4(1.0,0.0,1.0,1.0);" +
-  "}";
+  "void main(){  gl_FragColor = vec4(1.0,0.0,1.0,1.0); }";
 
 //初始化着色器
 const program = initShader(gl, vertexShaderSource, fragShaderSource);
 
 //获取顶点着色器的位置变量apos，即aposLocation指向apos变量。
 const aposLocation = gl.getAttribLocation(program, "apos");
-//类型数组构造函数Float32Array创建顶点数组
-const data = new Float32Array([0, 0.5, 0, 1]);
+//9个元素构建三个顶点的xyz坐标值
+const data = new Float32Array([
+  //z为0.5时，xOy平面上的四个点坐标
+  0.5, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5,
+  //z为-0.5时，xOy平面上的四个点坐标
+  0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5,
+  //上面两组坐标分别对应起来组成一一对
+  0.5, 0.5, 0.5, 0.5, 0.5, -0.5,
+
+  -0.5, 0.5, 0.5, -0.5, 0.5, -0.5,
+
+  -0.5, -0.5, 0.5, -0.5, -0.5, -0.5,
+
+  0.5, -0.5, 0.5, 0.5, -0.5, -0.5,
+]);
 
 //创建缓冲区对象
-var buffer = gl.createBuffer();
+const buffer = gl.createBuffer();
 //绑定缓冲区对象
 gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
 //顶点数组data数据传入缓冲区
@@ -45,5 +66,9 @@ gl.vertexAttribPointer(aposLocation, 3, gl.FLOAT, false, 0, 0);
 //允许数据传递
 gl.enableVertexAttribArray(aposLocation);
 
-//开始绘制，显示器显示结果
-gl.drawArrays(gl.POINTS, 0, 1);
+//LINE_LOOP模式绘制前四个点 首尾相连
+gl.drawArrays(gl.LINE_LOOP, 0, 4);
+//LINE_LOOP模式从第五个点开始绘制四个点
+gl.drawArrays(gl.LINE_LOOP, 4, 4);
+//LINES模式绘制后8个点 离散相连
+gl.drawArrays(gl.LINES, 8, 8);

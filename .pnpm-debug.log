@@ -1,0 +1,62 @@
+{
+  "0 debug pnpm:scope": {
+    "selected": 1
+  },
+  "1 debug pnpm:package-manifest": {
+    "initial": {
+      "name": "webgl-learning",
+      "version": "1.0.0",
+      "description": "",
+      "main": "index.js",
+      "scripts": {
+        "dev": "vite"
+      },
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Seafarer-C/webgl-learning.git"
+      },
+      "author": "",
+      "license": "ISC",
+      "bugs": {
+        "url": "https://github.com/Seafarer-C/webgl-learning/issues"
+      },
+      "homepage": "https://github.com/Seafarer-C/webgl-learning#readme",
+      "devDependencies": {
+        "vite": "^4.0.3"
+      }
+    },
+    "prefix": "/Users/chenbohan/my-projects/webgl-learning"
+  },
+  "2 debug pnpm:context": {
+    "currentLockfileExists": false,
+    "storeDir": "/Users/chenbohan/Library/pnpm/store/v3",
+    "virtualStoreDir": "/Users/chenbohan/my-projects/webgl-learning/node_modules/.pnpm"
+  },
+  "3 debug pnpm:stage": {
+    "prefix": "/Users/chenbohan/my-projects/webgl-learning",
+    "stage": "resolution_started"
+  },
+  "4 error pnpm": {
+    "code": "ERR_PNPM_FETCH_401",
+    "hint": "No authorization header was set for the request.",
+    "request": {
+      "url": "https://npm.gaoding.com/vite"
+    },
+    "response": {
+      "size": 0
+    },
+    "pkgName": "vite",
+    "spec": {
+      "fetchSpec": ">=4.0.3 <5.0.0-0",
+      "name": "vite",
+      "type": "range"
+    },
+    "pkgsStack": [],
+    "err": {
+      "name": "pnpm",
+      "message": "GET https://npm.gaoding.com/vite: Unauthorized - 401",
+      "code": "ERR_PNPM_FETCH_401",
+      "stack": "pnpm: GET https://npm.gaoding.com/vite: Unauthorized - 401\n    at RetryOperation._fn (/Users/chenbohan/.nvm/versions/node/v16.15.1/lib/node_modules/pnpm/dist/pnpm.cjs:85618:19)\n    at processTicksAndRejections (internal/process/task_queues.js:95:5)"
+    }
+  }
+}
