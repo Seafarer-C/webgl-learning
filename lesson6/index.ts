@@ -6,7 +6,6 @@ const gl = getGL();
  **/
 //立方体：顶点着色器程序
 var cubeVertexShaderSource =
-  "" +
   //attribute声明vec4类型变量a_Position
   "attribute vec4 a_Position;" +
   "attribute vec4 a_color;" + //attribute声明顶点颜色变量
@@ -502,9 +501,10 @@ var textureData = new Float32Array([
 var image = new Image();
 image.onload = texture;
 image.src = "glb.jpg";
+
 /**
-     创建缓冲区textureBuffer，传入图片纹理数据，然后执行绘制方法drawArrays()
-     **/
+ 创建缓冲区textureBuffer，传入图片纹理数据，然后执行绘制方法drawArrays()
+**/
 function texture() {
   var texture = gl.createTexture(); //创建纹理图像缓冲区
   gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true); //纹理图片上下反转
@@ -512,8 +512,6 @@ function texture() {
   gl.bindTexture(gl.TEXTURE_2D, texture); //绑定纹理缓冲区
   //设置纹理贴图填充方式(纹理贴图像素尺寸大于顶点绘制区域像素尺寸)
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-  //设置纹理贴图填充方式(纹理贴图像素尺寸小于顶点绘制区域像素尺寸)
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
   //设置纹素格式，png格式对应gl.RGBA
   gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, image);
   /**
