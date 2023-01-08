@@ -26,7 +26,9 @@
   <body>
     <div class="view">
       <menu id="menu"> </menu>
-      <canvas id="canvas" width="600" height="800"></canvas>
+      <div id="container">
+        <canvas id="canvas" width="600" height="800"></canvas>
+      </div>
     </div>
     <script type="module">
       const pathname = window.location?.pathname;
@@ -42,6 +44,9 @@
         "绘制彩色立方体",
         "光照模型",
         "局部贴图",
+        "three",
+        "加载obj",
+        "canvas 贴图",
       ];
       const menu = document.getElementById("menu");
 
