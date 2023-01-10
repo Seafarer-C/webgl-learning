@@ -12,13 +12,13 @@ var OBJLoader = new OBJL.OBJLoader(); //obj加载器
 const texture = new THREE.CanvasTexture(canvas);
 texture.needsUpdate = true;
 
-OBJLoader.load("chair.obj", function (obj) {
+OBJLoader.load("plate/Plate.obj", function (obj) {
   // 直接使用 texture 进行贴图
   obj.children[0].material.map = texture;
 
   console.log("物体", obj);
   obj.scale.set(0.2, 0.2, 0.2); //放大obj组对象
-  obj.rotation.set(90, 0, 0);
+  obj.rotation.set(0, 0, 0);
   scene.add(obj); //返回的组对象插入场景中
 
   render();
