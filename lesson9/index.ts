@@ -12,11 +12,13 @@ var OBJLoader = new OBJL.OBJLoader(); //obj加载器
 const texture = new THREE.CanvasTexture(canvas);
 texture.needsUpdate = true;
 
-OBJLoader.load("plate/Plate.obj", function (obj) {
+OBJLoader.load("football/model2.obj", function (obj) {
   // 直接使用 texture 进行贴图
-  obj.children[0].material.map = texture;
+  obj.children[0].material.forEach((element) => {
+    element.map = texture;
+  });
 
-  console.log("物体", obj);
+  console.log("物体", obj, obj.children[0].material[0]);
   obj.scale.set(0.2, 0.2, 0.2); //放大obj组对象
   obj.rotation.set(0, 0, 0);
   scene.add(obj); //返回的组对象插入场景中
@@ -34,6 +36,8 @@ scene.add(point); //点光源添加到场景中
 //环境光
 const ambient = new THREE.AmbientLight(0x444444);
 scene.add(ambient);
+let ambient2 = new THREE.AmbientLight(0x999999);
+scene.add(ambient2);
 /**
  * 相机设置
  */

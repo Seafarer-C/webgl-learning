@@ -12,9 +12,9 @@ var MTLLoader = new MTLL.MTLLoader(); //材质文件加载器
 MTLLoader.load("chair.mtl", function (materials) {
   // 返回一个包含材质的对象MaterialCreator
   // obj的模型会和MaterialCreator包含的材质对应起来
-  OBJLoader.setMaterials(materials);
+  // OBJLoader.setMaterials(materials);
 
-  OBJLoader.load("chair.obj", function (obj) {
+  OBJLoader.load("football/model2.obj", function (obj) {
     console.log("物体", obj);
     obj.scale.set(0.2, 0.2, 0.2); //放大obj组对象
     obj.rotation.set(90, 0, 0);
